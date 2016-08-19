@@ -1,5 +1,10 @@
 {
-  "version": "1.0.0-*",
+  "version": "1.0.0-Release-*",
+
+  "packOptions": {
+    "licenseUrl": "https://github.com/ctorx/ctorx.Core.Data/master/LICENSE",
+    "projectUrl": "https://github.com/ctorx/ctorx.Core.Data/"
+  },
 
   "dependencies": {
     "Microsoft.EntityFrameworkCore": "1.0.0",
