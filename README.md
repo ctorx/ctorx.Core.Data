@@ -38,7 +38,7 @@ Leverage services to encapsulate business logic and handle data operations.
     /// <summary>
     /// Sample method to fetch a list of entities
     /// </summary>
-    public Task<IList<YourEntity> GetRecentAddedEntitiesAsync();
+    public Task<IList<YourEntity>> GetRecentAddedEntitiesAsync();
   }
   
   public class YourEntityService : DbContextService<YourDbContext>, IYourEntityService
@@ -46,7 +46,7 @@ Leverage services to encapsulate business logic and handle data operations.
     /// <summary>
     /// Sample method to fetch a list of entities
     /// </summary>
-    public async Task<IList<YourEntity> GetRecentAddedEntitiesAsync()
+    public async Task<IList<YourEntity>> GetRecentAddedEntitiesAsync()
     {
       return await this.GetSet<YourEntity>()
         .Where(x => x.SomeProperty)
