@@ -12,8 +12,8 @@ The Context Repository exposes methods for fetching, adding, attaching and delet
 
   public class YourContextRepository : DbContextRepository<YourDbContext>, IYourContextRepository
   {
-    public YourContextRepository(IDbContextResolver<YourDbContext> dbContextResolver ) : 
-      base(dbContextResolver) { }
+    public YourContextRepository(YourDbContext yourDbContext ) : 
+      base(yourDbContext) { }
   }
 ```
 ###Wire Dependencies
@@ -21,7 +21,6 @@ You must wire the required dependencies manually or via the UseUoW() extension m
 
 ```csharp
   // Manually
-  services.AddScoped<IDbContextResolver<YourDbContext>, DefaultDbContextResolver<YourDbContext>>();
   services.AddScoped<IUnitOfWorkFactory<YourDbContext>, DefaultUnitOfWorkFactory<YourDbContext>>();
   services.AddScoped<IDbContextRepository<YourDbContext>, YourContextRepository>();
   

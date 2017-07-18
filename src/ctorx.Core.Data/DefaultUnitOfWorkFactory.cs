@@ -4,14 +4,14 @@ namespace ctorx.Core.Data
 {
     public class DefaultUnitOfWorkFactory<TDbContext> : IUnitOfWorkFactory<TDbContext> where TDbContext : DbContext
     {
-        readonly IDbContextResolver<TDbContext> DataContextResolver;
+        readonly TDbContext DbContext;
 
         /// <summary>
         /// ctor the Mighty
         /// </summary>
-        public DefaultUnitOfWorkFactory(IDbContextResolver<TDbContext> dataContextResolver)
+        public DefaultUnitOfWorkFactory(TDbContext dbContext)
         {
-            this.DataContextResolver = dataContextResolver;
+            this.DbContext = dbContext;
         }
 
         /// <summary>
@@ -19,7 +19,7 @@ namespace ctorx.Core.Data
         /// </summary>
         public IUnitOfWork<TDbContext> NewUnitOfWork()
         {
-            return new UnitOfWork<TDbContext>(this.DataContextResolver);
+            return new UnitOfWork<TDbContext>(this.DbContext);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <VersionPrefix>0.9.0-beta</VersionPrefix>    
+    <VersionPrefix>0.9.1-beta</VersionPrefix>    
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <AssemblyName>ctorx.Core.Data</AssemblyName>
     <PackageId>ctorx.Core.Data</PackageId>

@@ -7,19 +7,14 @@ namespace ctorx.Core.Data
 {
     public abstract class DbContextRepository<TDbContext> : IDbContextRepository<TDbContext> where TDbContext : DbContext
     {
-        readonly IDbContextResolver DbContextResolver;
-
-        protected DbContextRepository(IDbContextResolver dbContextResolver )
-        {
-            this.DbContextResolver = dbContextResolver;
-        }
-
         /// <summary>
-        /// Gets the Context
+        /// Gets the DbContext
         /// </summary>
-        public DbContext Context
+        public TDbContext DbContext { get; }
+
+        protected DbContextRepository(TDbContext dbContext)
         {
-            get { return this.DbContextResolver.GetContext(); }
+            this.DbContext = dbContext;
         }
 
         /// <summary>
@@ -27,7 +22,7 @@ namespace ctorx.Core.Data
         /// </summary>
         public IQueryable<TEntity> GetSet<TEntity>() where TEntity : class
         {
-            return this.Context.Set<TEntity>();
+            return this.DbContext.Set<TEntity>();
         }
 
         /// <summary>
@@ -40,7 +35,7 @@ namespace ctorx.Core.Data
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            this.Context.Set<TEntity>().Add(entity);
+            this.DbContext.Set<TEntity>().Add(entity);
         }
 
         /// <summary>
@@ -53,7 +48,7 @@ namespace ctorx.Core.Data
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            this.Context.Set<TEntity>().Attach(entity);
+            this.DbContext.Set<TEntity>().Attach(entity);
         }
 
         /// <summary>
@@ -66,7 +61,7 @@ namespace ctorx.Core.Data
                 throw new ArgumentNullException(nameof(entity));
             }
 
-            this.Context.Set<TEntity>().Remove(entity);
-        }        
+            this.DbContext.Set<TEntity>().Remove(entity);
+        }
     }
 }

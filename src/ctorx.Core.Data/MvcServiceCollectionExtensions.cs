@@ -12,7 +12,6 @@ namespace ctorx.Core.Data
             where TDbContext : DbContext 
             where TConcreteRepository : DbContextRepository<TDbContext>
         {
-            serviceCollection.AddScoped<IDbContextResolver<TDbContext>, DefaultDbContextResolver<TDbContext>>();
             serviceCollection.AddScoped<IUnitOfWorkFactory<TDbContext>, DefaultUnitOfWorkFactory<TDbContext>>();
             serviceCollection.AddScoped<IDbContextRepository<TDbContext>, TConcreteRepository>();
 

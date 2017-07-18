@@ -6,20 +6,15 @@ namespace ctorx.Core.Data
 {
     public class UnitOfWork<TDbContext> : IUnitOfWork<TDbContext> where TDbContext : DbContext
     {
-        readonly IDbContextResolver<TDbContext> DbContextResolver;
-
+        TDbContext DbContext;
         bool IsDisposed;
-        DbContext Context => this.DbContextResolver.GetContext();
 
         /// <summary>
         /// ctor the Mighty
         /// </summary>
-        public UnitOfWork(IDbContextResolver<TDbContext> dbContextResolver)
+        public UnitOfWork(TDbContext dbContext)
         {
-            this.DbContextResolver = dbContextResolver;
-
-            // Multiple units of work for the same context cannot exist
-            //this.DbContextResolver.DestroyContext();
+            this.DbContext = dbContext;
         }
 
         /// <summary>
@@ -27,7 +22,7 @@ namespace ctorx.Core.Data
         /// </summary>
         public void Commit()
         {
-            this.Context.SaveChanges();
+            this.DbContext.SaveChanges();
         }
 
         /// <summary>
@@ -35,7 +30,7 @@ namespace ctorx.Core.Data
         /// </summary>
         public async Task CommitAsync()
         {
-            await this.Context.SaveChangesAsync();
+            await this.DbContext.SaveChangesAsync();
         }
 
         /// <summary>
@@ -43,7 +38,21 @@ namespace ctorx.Core.Data
         /// </summary>
         public void Rollback()
         {
-            this.Dispose();
+            // see: http://stackoverflow.com/questions/16437083/dbcontext-discard-changes-without-disposing
+            foreach (var entry in this.DbContext.ChangeTracker.Entries())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Modified:
+                    case EntityState.Deleted:
+                        entry.State = EntityState.Modified;
+                        entry.State = EntityState.Unchanged;
+                        break;
+                    case EntityState.Added:
+                        entry.State = EntityState.Detached;
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -64,7 +73,7 @@ namespace ctorx.Core.Data
             {
                 if (disposing)
                 {
-                    this.DbContextResolver.DestroyContext(); ;
+                    this.DbContext = null;
                 }
 
                 this.IsDisposed = true;
