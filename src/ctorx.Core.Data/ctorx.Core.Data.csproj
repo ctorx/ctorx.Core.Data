@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VersionPrefix>0.9.0-beta</VersionPrefix>    
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <AssemblyName>ctorx.Core.Data</AssemblyName>
+    <PackageId>ctorx.Core.Data</PackageId>
+    <Authors>Matthew Marksbury</Authors>
+    <Description>UoW and Repository Pattern with EF</Description>
+    <PackageTags>core ef uow repository</PackageTags>
+    <PackageProjectUrl>https://github.com/ctorx/ctorx.Core.Data/</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/ctorx/ctorx.Core.Data/master/LICENSE</PackageLicenseUrl>
+    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
+    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IncludeSymbols>True</IncludeSymbols>
+    <IncludeSource>True</IncludeSource>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.0.3" />
+  </ItemGroup>
+
+</Project>
