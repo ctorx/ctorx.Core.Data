@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <VersionPrefix>0.9.1-beta</VersionPrefix>    
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>ctorx.Core.Data</AssemblyName>
     <PackageId>ctorx.Core.Data</PackageId>
     <Authors>Matthew Marksbury</Authors>
@@ -17,10 +17,12 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <IncludeSymbols>True</IncludeSymbols>
     <IncludeSource>True</IncludeSource>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.0" />
   </ItemGroup>
 
 </Project>
