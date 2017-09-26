@@ -1,5 +1,5 @@
 # ctorx.Core.Data
-This package provides unit of work and generic repository functionality for use in simplifying common tasks in application development for applications utilizing Entity Framework.  Applications control unit of work persistence while service layers are used to encapsulate business logic and provide a generic interface to DbContext functionality.
+This package provides unit of work and generic repository functionality for use in simplifying common tasks in application development for applications utilizing Entity Framework.
 
 ## Wait, Doesn't EF Already Provide Repository and Unit of Work?
 Entity Framework provides its own implementation of the Unit of Work and Repository patterns and when used directly in your application, serves to provide the offerings of those patterns effectively.  This framework is for developers who want to abstract Entity Framework away from the application yet maintain control over what constitutes a unit of work and when it is committed.  
@@ -17,7 +17,9 @@ Consider the following example in creating a new user from a web application:
   6. If the commit operation was successful, the controller then calls the service layer to send an email notification to the new user
   7. If the commit operation was NOT sucessful, the controller can log the error, notify the UI, and an email message is not sent.
   
-And because all of the changes are made within the unit of work, they benefit from EF's transaction scoping.  If the add user operation succeeds but the add role operation does not, the unit of work will not persist.
+And because all of the changes are made within the unit of work, they benefit from EF's transaction scoping.  If the add user operation succeeds but the add role operation does not, the unit of work will not persist and the application knows it should not send the email message.  
+
+## The Code - Getting things Going
 
 ### Create your Context based Repository
 
@@ -58,7 +60,7 @@ Services are used to encapsulate business logic.
   }
 ```
 
-*NOTE that you can use a DbContextService to perform data operation on any entity in your context, though you should aim for more entity specific services*
+*NOTE that you can use a DbContextService to perform data operations on any entity in your context, though you should aim for more entity specific services*
 
 ### Using the Unit of Work
 The unit of work is the wrapper around the SaveChanges method that you'll need to utilize in your applications when adding or updating data.  You don't need a UoW for retrieving data.
