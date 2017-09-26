@@ -1,9 +1,9 @@
 # ctorx.Core.Data
 This package provides unit of work and repository pattern functionality for use in simplifying common tasks in application development for applications utilizing Entity Framework.  Applications control unit of work persistence while service layers are used to encapsulate business logic and provide a generic interface to DbContext functionality.
 
-##How to Use It
+## How to Use It
 
-###Create your Context based Repository
+### Create your Context based Repository
 
 The Context Repository exposes methods for fetching, adding, attaching and deleting data.
 
@@ -16,7 +16,7 @@ The Context Repository exposes methods for fetching, adding, attaching and delet
       base(yourDbContext) { }
   }
 ```
-###Wire Dependencies
+### Wire Dependencies
 You must wire the required dependencies manually or via the UseUoW() extension method in `Startup.ConfigureServices()`.
 
 ```csharp
@@ -28,7 +28,7 @@ You must wire the required dependencies manually or via the UseUoW() extension m
   services.UseUow<YourDbContext, YourContextRepository>();
 ```
 
-###Create a Service
+### Create a Service
 Leverage services to encapsulate business logic and handle data operations.
 
 ```csharp
@@ -56,7 +56,7 @@ Leverage services to encapsulate business logic and handle data operations.
 
 *NOTE that you can use a DbContextService to perform data operation on any entity in your context, though you should aim for more entity specific services*
 
-###Using the Unit of Work
+### Using the Unit of Work
 The unit of work is the wrapper around the SaveChanges method that you'll need to utilize in your applications when adding or updating data.  You don't need a UoW for retrieving data.
 
 Here's an example from an ASP.NET Core MVC Controller
