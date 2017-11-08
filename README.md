@@ -110,11 +110,11 @@ Here's an example from an ASP.NET Core MVC Controller
 You must wire the required dependencies manually or via the UseUoW() extension method in `Startup.ConfigureServices()`.
 
 ```csharp
-  // Manually
+  // Cowboy Style...
   services.AddScoped<IUnitOfWorkFactory<YourDbContext>, DefaultUnitOfWorkFactory<YourDbContext>>();
   services.AddScoped<IDbContextRepository<YourDbContext>, YourContextRepository>();
   
-  // Or...via UseUow()
+  // Or...via Extension Methods
   services.UseUow<YourDbContext, YourContextRepository>();
 ```
 
